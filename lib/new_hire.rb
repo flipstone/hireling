@@ -5,7 +5,7 @@ class NewHire
     attr_accessor :schedule
   end
 
-  def self.each_app_girl_name
+  def self.each_app_hire_name
     Dir[File.join(Rails.root, %w(app new_hires *.rb))].each do |hire_file|
       hire_name = File.basename(hire_file, '.rb')
       yield hire_name.to_sym
