@@ -14,7 +14,9 @@ specification = Gem::Specification.new do |s|
   s.rubyforge_project = ""
   s.bindir = "bin"
   s.has_rdoc = false
-
+  s.add_dependency('daemons', '>= 1.0.10')
+  s.add_dependency('rufus-scheduler', '>= 2.0.6')
+  
   s.files = FileList['{lib,test}/**/*.{rb,rake}', 'Rakefile'].to_a
 end
 
@@ -22,5 +24,3 @@ Rake::GemPackageTask.new(specification) do |package|
   package.need_zip = false
   package.need_tar = false
 end
-
-# Rake::Task[:gem].prerequisites.unshift :default

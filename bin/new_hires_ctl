@@ -10,4 +10,4 @@ require "daemons"
 
 options = {:dir => "../../log", :monitor => false, :multiple => false, :dir_mode => :script}
 
-Daemons.run File.dirname(__FILE__) + '/new_hires.rb', options
+Daemons.run File.dirname(__FILE__) + '../lib/new_hire/new_hires.rb', options
