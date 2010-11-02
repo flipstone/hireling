@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require "daemons"
+
+# dir_mode: script
+# dir: ../../log
+# multiple: false
+# backtrace: true
+# monitor: true
+
+options = {:dir => "../../log", :monitor => false, :multiple => false, :dir_mode => :script}
+
+Daemons.run File.dirname(__FILE__) + '/new_hires.rb', options
