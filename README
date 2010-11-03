@@ -1,12 +1,12 @@
-Got an unpleasant chore that needs to be run repeatedly?  Put a new_hire on it.
+Got an unpleasant chore that needs to be run repeatedly?  Put a hireling on it.
 
 We've mixed Rufus scheduler and the widely-used daemons library into a simple 
 background process setup.  Hope you find it as useful as we do.
 
 ===
-1. Declare your new_hire worker class.
+1. Declare your hireling worker class.
 
 2. Add his/her work schedule.
 
-3. Start the new_hires daemon.
+3. Start the hireling daemon.
 
