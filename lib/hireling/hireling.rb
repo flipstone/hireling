@@ -6,14 +6,15 @@ class Hireling
   end
 
   def self.each_app_hireling_name
-    Dir[File.join(Rails.root, %w(app hirelings *.rb))].each do |hireling_file|
+    Dir[File.join(%w(app hirelings *.rb))].each do |hireling_file|
+      require hireling_file
       hireling_name = File.basename(hireling_file, '.rb')
       yield hireling_name.to_sym
     end
   end
 
   def self.schedule_with_scheduler(scheduler)
-    NewHire.schedule.schedule(scheduler, new)
+    Hireling.schedule.schedule(scheduler, new)
     info "scheduled"
   end
 
@@ -53,7 +54,7 @@ class Hireling
     def schedule(rufus_scheduler, hireling)
       proxy = @proxies[hireling.class.name.underscore.to_sym]
       raise "No schedule found for #{hireling.class}" unless proxy
-      proxy.replay(rufus_scheduler,\nling)
+      proxy.replay(rufus_scheduler,hirerling)
     end
   end
 

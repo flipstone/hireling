@@ -2,12 +2,6 @@
 require 'rubygems'
 require "daemons"
 
-# dir_mode: script
-# dir: ../../log
-# multiple: false
-# backtrace: true
-# monitor: true
+options = {:dir => "log/", :monitor => false, :multiple => false, :dir_mode => :normal, :rails_root => Dir.pwd}
 
-options = {:dir => "../../log", :monitor => false, :multiple => false, :dir_mode => :script}
-
-Daemons.run File.dirname(__FILE__) + '../lib/new_hire/hirelings.rb', options
+Daemons.run File.dirname(__FILE__) + '/../lib/hireling/hirelings.rb', options
