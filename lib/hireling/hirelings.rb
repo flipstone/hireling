@@ -9,16 +9,11 @@ ENV["RAILS_ENV"] ||= "development"
 
 require "daemons"
 require 'rufus/scheduler'
-
-if Daemons.controller 
-  require "#{Daemons.controller.options[:rails_root]}/config/environment"
-else
-  require "config/environment" unless defined?(Rails.root) 
-end
+require "#{Daemons.controller.options[:rails_root]}/config/environment"
 
 scheduler = Rufus::Scheduler.start_new
 
-Hireling.each_app_hireling_name do |hireling_name|
+Hireling.each_app_hireling_name(Daemons.controller.options[:rails_root]) do |hireling_name|
   hireling_class = hireling_name.to_s.camelize.constantize
   hireling_class.schedule_with_scheduler scheduler
 end

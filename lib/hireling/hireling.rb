@@ -5,8 +5,10 @@ class Hireling
     attr_accessor :schedule
   end
 
-  def self.each_app_hireling_name
-    Dir[File.join(%w(app hirelings *.rb))].each do |hireling_file|
+  def self.each_app_hireling_name(rails_root)
+    hireling_classes ||= Dir[File.join(rails_root, %w(app hirelings *.rb))]
+    hireling_classes ||= Dir[File.join(%w(app hirelings *.rb))]
+    hireling_classes.each do |hireling_file|
       require hireling_file
       hireling_name = File.basename(hireling_file, '.rb')
       yield hireling_name.to_sym
@@ -40,7 +42,7 @@ class Hireling
   end
 
   def self.info(message)
-    Rails.logger.info "WorkingGirl #{name} at #{Time.now}: #{message}"
+    Rails.logger.info "Hireling #{name} at #{Time.now}: #{message}"
   end
 
   class Schedule
@@ -53,8 +55,8 @@ class Hireling
 
     def schedule(rufus_scheduler, hireling)
       proxy = @proxies[hireling.class.name.underscore.to_sym]
-      raise "No schedule found for #{hireling.class}" unless proxy
-      proxy.replay(rufus_scheduler,hirerling)
+      raise "No schedule found for #{hireling.class.name.underscore.to_sym}" unless proxy
+      proxy.replay(rufus_scheduler,hireling)
     end
   end
 
